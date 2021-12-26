@@ -8,8 +8,7 @@ CREATE TABLE entry (
 );
 
 CREATE TABLE tag (
-    id INTEGER PRIMARY KEY,
-    name TEXT NOT NULL UNIQUE,
+    name TEXT NOT NULL UNIQUE PRIMARY KEY,
     created_at TIMESTAMP NOT NULL
         DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL
@@ -18,11 +17,11 @@ CREATE TABLE tag (
 
 CREATE TABLE entry_tag (
     entry_id INTEGER NOT NULL,
-    tag_id INTEGER NOT NULL,
+    tag_name TEXT NOT NULL,
     FOREIGN KEY (entry_id)
         REFERENCES entry (id),
-    FOREIGN KEY (tag_id)
-        REFERENCES tag (id)
+    FOREIGN KEY (tag_name)
+        REFERENCES tag (name)
 );
 
 CREATE TABLE access_log (
