@@ -1,18 +1,37 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from datetime import datetime
-from typing import Optional
 
 from pydantic import BaseModel
 
 
-class Entry(BaseModel):
+class EntryBase(BaseModel):
     content: str
-    tags: str
-    updated_at: Optional[datetime]
 
 
-class Tag(BaseModel):
+class EntryCreate(EntryBase):
+    pass
+
+
+class Entry(EntryBase):
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        orm_mode = True
+
+
+class TagBase(BaseModel):
     name: str
-    updated_at: Optional[datetime]
 
+
+class TagCreate(TagBase):
+    pass
+
+
+class Tag(TagBase):
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        orm_mode = True
